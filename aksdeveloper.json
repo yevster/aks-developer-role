@@ -1,0 +1,30 @@
+{
+  "Name": "AKS Developer",
+  "IsCustom": true,
+  "Description": "Can perform development tasks on AKS and ACR",
+  "Actions": [
+    "Microsoft.ContainerRegistry/*/read",
+    "Microsoft.ContainerRegistry/*/queueBuild/action",
+    "Microsoft.ContainerRegistry/registries/builds/getLogLink/action",
+    "Microsoft.ContainerRegistry/registries/buildTasks/listSourceRepositoryProperties/action",
+    "Microsoft.ContainerRegistry/registries/scheduleRun/action",
+    "Microsoft.ContainerRegistry/registries/listBuildSourceUploadUrl/action",
+    "Microsoft.ContainerRegistry/registries/runs/cancel/action",
+    "Microsoft.ContainerRegistry/registries/builds/cancel/action",
+    "Microsoft.ContainerRegistry/registries/push/write",
+    "Microsoft.ContainerRegistry/registries/runs/listLogSasUrl/action",
+
+    "Microsoft.ContainerService/containerServices/*/read",
+    "Microsoft.ContainerService/managedClusters/*/read",
+    "Microsoft.ContainerService/managedClusters/listClusterUserCredential/action"
+
+  ],
+  "NotActions": [
+      "Microsoft.ContainerService/managedClusters/listClusterAdminCredential/action"
+  ],
+  "DataActions": [],
+  "NotDataActions": [],
+  "AssignableScopes": [
+    "${RESOURCE_GROUP}"
+  ]
+}
