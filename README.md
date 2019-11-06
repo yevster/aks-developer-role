@@ -6,7 +6,15 @@ The only problem: there is no built-in Azure role that allows you to use ACR tas
 
 ## The role
 
-To put it simply, the AKS Developer Role allows a user or service principal to push and pull images from ACR, run and cancel ACR tasks, and obtain non-administrative AKS credentials (in order to use `kubectl` to test your work).
+To put it simply, the AKS Developer Role allows a user or service principal to push and pull images from ACR, run and cancel ACR tasks, and obtain non-administrative AKS credentials (in order to use `az aks get-credentials` to enable the use of `kubectl`).
+
+To remove the AKS credentials permissions (for instance, if you will be providing kubernetes configuration files independently), remove the following lines from `aksdeveloper.json` as well as the trailing comma from the line preceding them:
+
+```json
+    "Microsoft.ContainerService/containerServices/*/read",
+    "Microsoft.ContainerService/managedClusters/*/read",
+    "Microsoft.ContainerService/managedClusters/listClusterUserCredential/action"
+```
 
 ## Setting up the role
 
@@ -25,4 +33,11 @@ You can then assign the role to a user or a service principal using [`az role as
 
 ## The test
 
-The files in the `test` directory serve as a semi-automated smoke test of the role. `test.sh` creates a resource group containing ACR and AKS instances, creates a service principal with the AKS Developer role, and then logs in as that service principal and performs an image build and an AKS deployment. You may find this file helpful as an example for how you might automate the creation of your development/dev testing environment.
+The files in the `test` directory serve as a semi-automated smoke test of the role. `test.sh` performs the following tasks:
+
+1. Creates a resource group containing ACR and AKS instances
+1. Creates a service principal with the AKS Developer role
+1. Logs in as that service principal and performs an image build and an AKS deployment. 
+1. After you login in again with your own credentials, cleans up the resources and service principal it created.
+
+You may find this file helpful as an example for how you might automate the creation of your development/dev testing environment.
