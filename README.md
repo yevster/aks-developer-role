@@ -4,6 +4,8 @@
 
 The only problem: there is no built-in Azure role that allows you to use ACR tasks without also allowing other modifications. That's where the "AKS Developer Role" comes in.
 
+**Note:** this repository is only a sample and is for information use only. The files and contents herein are **not supported by Microsoft**.
+
 ## The role
 
 To put it simply, the AKS Developer Role allows a user or service principal to push and pull images from ACR, run and cancel ACR tasks, and obtain non-administrative AKS credentials (in order to use `az aks get-credentials` to enable the use of `kubectl`).
